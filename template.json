@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json.schemastore.org/template",
+  "author": "Rickard Jansson",
+  "classifications": ["Test", "Playwright", "NUnit"],
+  "tags": {
+    "language": "C#",
+    "type": "project",
+    "framework": "nunit"
+  },
+  "name": "Playwright Web Test Template (PWW)",
+  "identity": "RickardApps.PWW",
+  "shortName": "pww",
+  "sourceName": "PWW"
+  
+}
