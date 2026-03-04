@@ -3,7 +3,7 @@ using UiTests.Base;
 
 namespace PWW;
 
-public class Tests : PlaywrightTestBase
+public class GoogleTests : PlaywrightTestBase
 {
     [SetUp]
     public async Task TestSetup()
