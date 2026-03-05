@@ -8,22 +8,23 @@ public abstract class PlaywrightTestBase
     protected IBrowser Browser = null!;
     protected IBrowserContext Context = null!;
     protected IPage Page = null!;
-
-    private readonly string _browserName;
+    protected string BrowserName { get; }
+    protected TestConfig Config { get; }
 
     protected PlaywrightTestBase(string browserName)
     {
-        _browserName = browserName;
+        Config = ConfigLoader.Load();
+        BrowserName = browserName;
     }
 
-    protected virtual bool Headless => false;
+    protected virtual bool Headless => Config.Headless;
 
     [OneTimeSetUp]
     public async Task GlobalSetup()
     {
         Playwright = await Microsoft.Playwright.Playwright.CreateAsync();
 
-        Browser = _browserName switch
+        Browser = BrowserName.ToLower() switch
         {
             "chromium" => await Playwright.Chromium.LaunchAsync(new() { Headless = Headless }),
             "firefox" => await Playwright.Firefox.LaunchAsync(new() { Headless = Headless }),

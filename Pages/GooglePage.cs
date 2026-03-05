@@ -5,10 +5,12 @@ namespace PWW;
 public class GooglePage
 {
     private readonly IPage _page;
+    protected TestConfig Config { get; }
 
     public GooglePage(IPage page)
     {
         _page = page;
+        Config = ConfigLoader.Load();
     }
 
     private ILocator DenyCookies =>
@@ -16,7 +18,8 @@ public class GooglePage
 
     public async Task NavigateToStartPage()
     {
-        await _page.GotoAsync("https://www.google.se");
+        if (!string.IsNullOrEmpty(Config.BaseUrl))
+            await _page.GotoAsync(Config.BaseUrl);
         await DenyCookies.ClickAsync();
     }
 }

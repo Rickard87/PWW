@@ -1,0 +1,5 @@
+{
+  "Browsers": ["chromium"],
+  "Headless": false,
+  "BaseUrl": "https://www.google.se"
+}

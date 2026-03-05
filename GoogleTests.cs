@@ -3,13 +3,13 @@ using UiTests.Base;
 
 namespace PWW;
 
-[TestFixture("chromium")]
-// [TestFixture("firefox")]
-// [TestFixture("webkit")]
+[TestFixtureSource(nameof(Browsers))]
 public class GoogleTests : PlaywrightTestBase
 {
-    public GoogleTests(string browserName)
-        : base(browserName) { }
+    static string[] Browsers => ConfigLoader.Load().Browsers;
+
+    public GoogleTests(string browser)
+        : base(browser) { }
 
     [SetUp]
     public async Task TestSetup()
