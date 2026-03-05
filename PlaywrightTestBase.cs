@@ -1,5 +1,4 @@
 using Microsoft.Playwright;
-using NUnit.Framework;
 
 namespace UiTests.Base;
 
@@ -10,7 +9,13 @@ public abstract class PlaywrightTestBase
     protected IBrowserContext Context = null!;
     protected IPage Page = null!;
 
-    // 🔧 Här kan du centralt styra headless
+    private readonly string _browserName;
+
+    protected PlaywrightTestBase(string browserName)
+    {
+        _browserName = browserName;
+    }
+
     protected virtual bool Headless => false;
 
     [OneTimeSetUp]
@@ -18,9 +23,13 @@ public abstract class PlaywrightTestBase
     {
         Playwright = await Microsoft.Playwright.Playwright.CreateAsync();
 
-        Browser = await Playwright.Chromium.LaunchAsync(
-            new BrowserTypeLaunchOptions { Headless = Headless }
-        );
+        Browser = _browserName switch
+        {
+            "chromium" => await Playwright.Chromium.LaunchAsync(new() { Headless = Headless }),
+            "firefox" => await Playwright.Firefox.LaunchAsync(new() { Headless = Headless }),
+            "webkit" => await Playwright.Webkit.LaunchAsync(new() { Headless = Headless }),
+            _ => throw new ArgumentException("Unknown browser"),
+        };
     }
 
     [SetUp]

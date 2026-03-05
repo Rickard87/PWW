@@ -3,8 +3,14 @@ using UiTests.Base;
 
 namespace PWW;
 
+[TestFixture("chromium")]
+// [TestFixture("firefox")]
+// [TestFixture("webkit")]
 public class GoogleTests : PlaywrightTestBase
 {
+    public GoogleTests(string browserName)
+        : base(browserName) { }
+
     [SetUp]
     public async Task TestSetup()
     {
