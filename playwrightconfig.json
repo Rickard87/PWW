@@ -1,5 +1,18 @@
 {
-  "Browsers": ["chromium"],
-  "Headless": false,
-  "BaseUrl": "https://www.google.se"
+    "BaseUrl": "https://www.google.se",
+    "Targets": [
+        {
+            "Name": "Chromium Desktop (null)",
+            "Browser": "chromium",
+            "Device": null,
+            "Headless": false
+        },
+        {
+            "Name": "Chromium iPhone 6",
+            "Browser": "webkit",
+            "Device": "iPhone 6",
+            "Headless": false
+        }
+    ]
+  
 }

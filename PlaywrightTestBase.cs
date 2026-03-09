@@ -8,35 +8,41 @@ public abstract class PlaywrightTestBase
     protected IBrowser Browser = null!;
     protected IBrowserContext Context = null!;
     protected IPage Page = null!;
-    protected string BrowserName { get; }
-    protected TestConfig Config { get; }
+    protected readonly TestTarget Target;
 
-    protected PlaywrightTestBase(string browserName)
+    protected PlaywrightTestBase(TestTarget target)
     {
-        Config = ConfigLoader.Load();
-        BrowserName = browserName;
+        Target = target;
     }
-
-    protected virtual bool Headless => Config.Headless;
 
     [OneTimeSetUp]
     public async Task GlobalSetup()
     {
         Playwright = await Microsoft.Playwright.Playwright.CreateAsync();
 
-        Browser = BrowserName.ToLower() switch
+        Browser = Target.Browser.ToLower() switch
         {
-            "chromium" => await Playwright.Chromium.LaunchAsync(new() { Headless = Headless }),
-            "firefox" => await Playwright.Firefox.LaunchAsync(new() { Headless = Headless }),
-            "webkit" => await Playwright.Webkit.LaunchAsync(new() { Headless = Headless }),
-            _ => throw new ArgumentException("Unknown browser"),
+            "chromium" => await Playwright.Chromium.LaunchAsync(
+                new() { Headless = Target.Headless }
+            ),
+            "firefox" => await Playwright.Firefox.LaunchAsync(new() { Headless = Target.Headless }),
+            "webkit" => await Playwright.Webkit.LaunchAsync(new() { Headless = Target.Headless }),
+            _ => throw new ArgumentException($"Unknown browser: {Target.Browser}"),
         };
     }
 
     [SetUp]
     public async Task Setup()
     {
-        Context = await Browser.NewContextAsync();
+        if (!string.IsNullOrEmpty(Target.Device))
+        {
+            var device = Playwright.Devices[Target.Device];
+            Context = await Browser.NewContextAsync(device);
+        }
+        else
+        {
+            Context = await Browser.NewContextAsync();
+        }
         Page = await Context.NewPageAsync();
     }
 

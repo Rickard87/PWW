@@ -3,13 +3,13 @@ using UiTests.Base;
 
 namespace PWW;
 
-[TestFixtureSource(nameof(Browsers))]
+[TestFixtureSource(nameof(Targets))]
 public class GoogleTests : PlaywrightTestBase
 {
-    static string[] Browsers => ConfigLoader.Load().Browsers;
+    public static IEnumerable<TestTarget> Targets => ConfigLoader.Load().Targets;
 
-    public GoogleTests(string browser)
-        : base(browser) { }
+    public GoogleTests(TestTarget target)
+        : base(target) { }
 
     [SetUp]
     public async Task TestSetup()

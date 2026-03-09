@@ -20,6 +20,7 @@ public class GooglePage
     {
         if (!string.IsNullOrEmpty(Config.BaseUrl))
             await _page.GotoAsync(Config.BaseUrl);
-        await DenyCookies.ClickAsync();
+        if (await DenyCookies.IsVisibleAsync())
+            await DenyCookies.ClickAsync();
     }
 }
