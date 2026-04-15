@@ -1,6 +1,7 @@
 using Microsoft.Playwright;
+using PWW.Config;
 
-namespace PWW;
+namespace PWW.Pages;
 
 public class GooglePage
 {

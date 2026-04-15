@@ -1,5 +1,7 @@
 using System.Text.Json;
 
+namespace PWW.Config;
+
 public class TestTarget
 {
     public string Name { get; set; } = "";

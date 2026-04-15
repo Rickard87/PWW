@@ -1,6 +1,7 @@
 using Microsoft.Playwright;
+using PWW.Config;
 
-namespace UiTests.Base;
+namespace PWW.Base;
 
 public abstract class PlaywrightTestBase
 {

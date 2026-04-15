@@ -1,7 +1,9 @@
 ﻿using Microsoft.Playwright;
-using UiTests.Base;
+using PWW.Base;
+using PWW.Config;
+using PWW.Pages;
 
-namespace PWW;
+namespace PWW.Tests;
 
 [TestFixtureSource(nameof(Targets))]
 public class GoogleTests : PlaywrightTestBase
