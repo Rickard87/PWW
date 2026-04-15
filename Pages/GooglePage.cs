@@ -10,7 +10,7 @@ public class GooglePage
     public GooglePage(IPage page)
     {
         _page = page;
-        Config = ConfigLoader.Load();
+        Config = ConfigLoader.Cached;
     }
 
     private ILocator DenyCookies =>

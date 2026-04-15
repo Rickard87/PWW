@@ -6,15 +6,15 @@ namespace PWW;
 [TestFixtureSource(nameof(Targets))]
 public class GoogleTests : PlaywrightTestBase
 {
-    public static IEnumerable<TestTarget> Targets => ConfigLoader.Load().Targets;
+    public static IEnumerable<TestTarget> Targets => ConfigLoader.Cached.Targets;
 
     public GoogleTests(TestTarget target)
         : base(target) { }
 
     [SetUp]
-    public async Task TestSetup()
+    public async Task Setup()
     {
-        // Frivillig TestSetup - Undvik namnet "Setup" som finns i abstractet PlaywrightTestBase
+        // Frivillig per-test setup
     }
 
     [Test]

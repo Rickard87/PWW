@@ -27,12 +27,14 @@ public abstract class PlaywrightTestBase
             ),
             "firefox" => await Playwright.Firefox.LaunchAsync(new() { Headless = Target.Headless }),
             "webkit" => await Playwright.Webkit.LaunchAsync(new() { Headless = Target.Headless }),
-            _ => throw new ArgumentException($"Unknown browser: {Target.Browser}"),
+            _ => throw new InvalidOperationException(
+                $"Browser '{Target.Browser}' is not supported. ConfigLoader.Load() should have rejected this — was the TestTarget constructed manually?"
+            ),
         };
     }
 
     [SetUp]
-    public async Task Setup()
+    public async Task InitializePage()
     {
         if (!string.IsNullOrEmpty(Target.Device))
         {
