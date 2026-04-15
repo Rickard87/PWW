@@ -1,8 +1,21 @@
 # PWW
- PlayWright Web Test Template (NUnit, Playwright)
 
-API Test Template (XUnit, Playwright)
+**Playwright Web Test Template (NUnit, Playwright)**  
+---
 
-Install: 1. Download GIT 2. Open project in VS Code 3. Open terminal (root) 4. dotnet new install . --force
+## Installation
 
-Create project from template: 1. Create folder 2. Open folder in vs code (root) 3. dotnet new pww -n PROJECTNAME
+1. Clone the Git repository  
+2. Open the project in VS Code  
+3. Open the terminal in the project root folder  
+4. Install template
+
+```bash
+dotnet new install . --force
+```
+
+5. Create a folder and open a terminal inside it
+6. Create a new project from template
+```bash
+dotnet new pww -n PROJECTNAME
+```
